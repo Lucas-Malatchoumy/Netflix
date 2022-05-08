@@ -1,0 +1,57 @@
+.movie {
+    display: flex;
+    flex-direction: row;
+    margin-top: 25px;
+    color: white;
+    background-color: black;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+.info {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    width: 55%;
+    margin-left: 100px;
+}
+#poster {
+    border-radius: 0px;
+    margin-left: 50px;
+}
+.description {
+    padding-right: 20px;
+}
+.card-movie {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+    margin-right: 10px;
+    align-items: center;
+    text-align: center;
+}
+.category-movies {
+    display: flex;
+    flex-direction: row;
+    text-decoration: none;
+    flex-wrap: wrap;
+}
+.category-movies a {
+    text-decoration: none;
+    color: black;
+}
+.category-title {
+    margin-bottom: 20px;
+}
+img {
+    max-width: 300px;
+    max-height: 399px;
+}
+.casting {
+    font-style: italic;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+}
+.casting span {
+    margin-left: 10px;
+}
