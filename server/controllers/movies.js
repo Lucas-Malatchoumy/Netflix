@@ -1,4 +1,4 @@
-const db = require('../test');
+const db = require('../config');
 
 const getAdventureMovies = ((req, res) => {
     let sql = `SELECT movies.image, movies.id, genres.genre, movies.title

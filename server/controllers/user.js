@@ -1,4 +1,4 @@
-const db = require('../test');
+const db = require('../config');
 const bcrypt = require("bcrypt");
 const { sign } = require("jsonwebtoken")
 
