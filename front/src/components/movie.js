@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {useParams} from 'react-router-dom';
 import axios from "axios";
+import {MdFavoriteBorder } from "react-icons/md";
 import ('./movie.css')
 
 
@@ -33,7 +34,19 @@ function Movie(props) {
                 setCasting(response.data)
             }
             });
-        }
+    }
+
+    function favs() {
+        axios.get(`http://localhost:3001/Netflix/user/addToFavs/${movieId}`, {
+            headers: {
+                token: localStorage.getItem('token')
+            }
+        }).then((response) => {
+            if (response.data.message) {
+                alert(response.data.message)
+            }
+        })
+    }
     
   return (
         <div key={movie.id} className="movie">
@@ -51,6 +64,7 @@ function Movie(props) {
                 })}
                 <span>  {movie.duration} minutes  </span>
                 <span> (-{movie.parental_rating})</span>
+                <span><MdFavoriteBorder onClick={favs} /></span>
             </div>
             <h3>Description : </h3>
             <p className="description">{movie.description}</p>

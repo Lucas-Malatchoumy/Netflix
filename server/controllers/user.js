@@ -113,9 +113,44 @@ const updateUser = ((req, res) => {
   })
 })
 
+const addToFavs = ((req, res) => {
+  console.log(req.params);
+  const movieId = req.params.movie;
+  const userId = req.id.id;
+  let sql = `INSERT INTO users_favs_movies (user_id, movie_id) VALUES ('${userId}', '${movieId}') `;
+  db.query(sql, (err, result) => {
+      if (err) {
+          console.log(err);
+      }
+      else {
+          res.send(result);
+      }
+  })
+});
+
+const getFavs = ((req, res) => {
+  const id = req.params.user;
+  console.log(id);
+  let sql = `SELECT movies.title, movies.image, movies.id
+  FROM users_favs_movies
+  INNER JOIN users ON users_favs_movies.user_id = users.id
+  INNER JOIN movies ON users_favs_movies.movie_id = movies.id
+  WHERE users.id = '${id}'`;
+  db.query(sql, (err, result) => {
+      if (err) {
+          console.log(err);
+      }
+      else {
+          res.send(result);
+      }
+  })
+});
+
 module.exports = {
     register,
     login,
     getUserInfo,
-    updateUser
+    updateUser,
+    addToFavs,
+    getFavs
 }

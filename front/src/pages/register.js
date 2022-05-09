@@ -15,7 +15,6 @@ function Form(props) {
     const [zipCode, setZipCode] = useState("");
     const [profile, setProfile] = useState("");
     const [ movies, setMovies ] = useState([]);
-    const [categories, setCategories] = useState([]);
 
 
     function createUser(e) {
@@ -42,7 +41,7 @@ function Form(props) {
     }
 
   return (
-    <><Navbar />
+    <div className="register-page"><Navbar />
     <form className="register">
       <div class="form-row">
         <div class="form-group col-md-6">
@@ -84,7 +83,7 @@ function Form(props) {
       </div>
       <button type="submit" class="btn btn-primary" onClick={createUser}>Sign in</button>
   </form>
-    </>
+    </div>
   );
 }
 export default Form;

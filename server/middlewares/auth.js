@@ -1,7 +1,9 @@
 const { verify } = require("jsonwebtoken");
 
 const checkToken = (req, res, next) => {
+    console.log(req.header);
     const token = req.header('token');
+    console.log(token);
     if (!token) {
         return res.send({error: 'not login'})
     }

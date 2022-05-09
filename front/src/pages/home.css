@@ -32,10 +32,14 @@
     margin-right: -5px;
     margin-left: -5px;
 }
-
 .register {
     margin-left: 25%;
     margin-right: 25%;
+    margin-top: 100px;
+    padding: 40px 20px 60px 20px;
+    border-style: solid;
+    border-radius: 10px;
+    border-color: red;
 }
 
 .form-row>[class*=col-] {

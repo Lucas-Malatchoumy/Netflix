@@ -16,9 +16,7 @@ useEffect(() => {
 
     function getMovies() {
         axios.get("http://localhost:3001/Netflix/movies/genres").then((response) => {
-          console.log(response.data);
           setCategories(response.data);
-          console.log(categories);
         })
       }
   return (

@@ -8,7 +8,7 @@ function Login(props) {
     const [password, setPassword] = useState("");
     let navigate = useNavigate();
 
-    function createUser(e) {
+    function checkUser(e) {
       e.preventDefault();
         axios.post("http://localhost:3001/Netflix/user/login", {
             email: email,
@@ -27,17 +27,19 @@ function Login(props) {
   return (
     <div>
       <Navbar />
-      <form>
-        <label>
-          email :
-          <input type="text" onChange={(event) => {setEmail(event.target.value)}} />
-        </label>
-        <label>
-          password :
-          <input type="text" onChange={(event) => {setPassword(event.target.value)}} />
-        </label>
-        <button onClick={createUser}>Coucou</button>
-      </form>
+      <form className="register">
+      <div className="form-row">
+        <div className="form-group col-md-6">
+          <label>Email</label>
+          <input type="email" className="form-control" onChange={(event) => { setEmail(event.target.value); } } />
+        </div>
+        <div className="form-group col-md-6">
+          <label>Password</label>
+          <input type="email" className="form-control" onChange={(event) => { setPassword(event.target.value); } } />
+        </div>
+      </div>
+      <button type="submit" className="btn btn-primary mt-2" onClick={checkUser}>Login</button>
+  </form>
     </div>
   );
 }

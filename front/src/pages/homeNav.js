@@ -18,8 +18,8 @@ function Navbar() {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li className="nav-item">
-                    <Link to='/login'><button className="btn btn-outline-success mr-2">Login</button></Link>
+                    <li className="nav-item mr-5">
+                    <Link to='/login'><button className="btn btn-outline-success ">Login</button></Link>
                     </li>
                     <li className="nav-item">
                     <Link to='/register'><button className="btn btn-outline-primary">Register</button></Link>
