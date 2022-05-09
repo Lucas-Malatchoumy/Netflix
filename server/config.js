@@ -47,6 +47,10 @@ db.connect(function(err) {
         if (err) throw err;
         console.log("Table actors_movie created");
       });
+      db.query("CREATE TABLE IF NOT EXISTS movie_views ( id INT AUTO_INCREMENT NOT NULL PRIMARY KEY UNIQUE, movie_id INT NOT NULL, user_id INT NOT NULL, nb_views INT, FOREIGN KEY (movie_id) REFERENCES movies(id), FOREIGN KEY (user_id) REFERENCES users(id))", function (err, result) {
+        if (err) throw err;
+        console.log("Table movie_views created");
+      });
       
     const genres  = require('./genres.json');
 

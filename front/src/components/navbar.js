@@ -6,16 +6,15 @@ import axios from "axios";
 
 function Navbar() {
     const [filter, setFilter] = useState('title');
-    const [data, setData ] = useState([])
+    const [data, setData ] = useState([]);
+    const [nbMoviesWatch, setnbMoviesWatch] = useState([])
     let navigate = useNavigate();
 
     useEffect(() => {
-        getData()
+        getData();
+        nbView()
         }, [])
 
-    function Filter(e) {
-        setFilter(e.target.innerText)
-    }
     function getData() {
         axios.get("http://localhost:3001/Netflix/user/profile", {
             headers: {
@@ -29,6 +28,22 @@ function Navbar() {
               response.data.forEach((element) => {
                   setData(element);
               });
+            }
+        })
+    }
+    function nbView() {
+        axios.get(`http://localhost:3001/Netflix/user/nbView`, {
+            headers: {
+                token: localStorage.getItem('token')
+            }
+        }).then((response) => {
+            if (response.data.message) {
+                alert(response.data.message)
+            }
+            else {
+                response.data.forEach((element) => {
+                    setnbMoviesWatch(element.nb)
+                })
             }
         })
     }
@@ -52,6 +67,9 @@ function Navbar() {
                     <li className="nav-item">
                     <Link className="navbar-brand nav-link" to='/profile'><img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" width="30" height="30" alt=""></img></Link>
                     </li>
+                    <li className="mr-3">
+                        <span className="nbMovie">Nombre de films regardé : {nbMoviesWatch} </span>
+                    </li>
                     <li className="nav-item">
                     <button className="btn btn-outline-danger" onClick={logOut}>Log out</button>
                     </li>
@@ -63,7 +81,7 @@ function Navbar() {
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu>
-                        <Dropdown.Item onClick={((e) => Filter(e))} href="#/action-1">Title</Dropdown.Item>
+                        <Dropdown.Item href="#/action-1">Title</Dropdown.Item>
                         <Dropdown.Item href="#/action-2">Genre</Dropdown.Item>
                     </Dropdown.Menu>
                 </Dropdown>

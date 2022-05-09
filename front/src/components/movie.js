@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import {useParams} from 'react-router-dom';
 import axios from "axios";
 import {MdFavoriteBorder } from "react-icons/md";
+import ReactPlayer from 'react-player'
 import ('./movie.css')
 
 
@@ -12,7 +13,7 @@ function Movie(props) {
     const [casting, setCasting] =useState([])
 
     useEffect(() => {
-        getMovie()
+        getMovie();
       }, []);
 
     function getMovie() {
@@ -47,7 +48,18 @@ function Movie(props) {
             }
         })
     }
-    
+    function addView() {
+        axios.get(`http://localhost:3001/Netflix/user/addView/${movieId}`, {
+            headers: {
+                token: localStorage.getItem('token')
+            }
+        }).then((response) => {
+            if (response.data.message) {
+                alert(response.data.message)
+            }
+        })
+    }
+
   return (
         <div key={movie.id} className="movie">
             <img id="poster" src={movie.image}></img>
@@ -68,8 +80,10 @@ function Movie(props) {
             </div>
             <h3>Description : </h3>
             <p className="description">{movie.description}</p>
+            <ReactPlayer url='https://youtu.be/_SQVLIqqUww' onStart={addView} muted width="100%" height="100%" />
             </div>
         </div>
+        
   );
 }
 export default Movie;

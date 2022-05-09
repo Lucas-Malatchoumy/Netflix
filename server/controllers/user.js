@@ -83,7 +83,23 @@ const getUserInfo = ((req, res) => {
           res.send(result);
         }
     })
-})
+});
+
+const getNbView = ((req, res) => {
+  const userId = req.id.id;
+  let sql = `SELECT COUNT(user_id) AS 'nb' FROM movie_views WHERE user_id = '${userId}';`;
+    db.query(sql, (err, result) => {
+      console.log(result);
+        if (err) {
+          res.send({
+            error: 'nope'
+          })
+        }
+        else {
+          res.send(result);
+        }
+    })
+});
 
 const updateUser = ((req, res) => {
   const id = req.body.id
@@ -145,6 +161,36 @@ const getFavs = ((req, res) => {
       }
   })
 });
+const addView = ((req, res) => {
+  console.log(req.params);
+  const movieId = req.params.movie;
+  const userId = req.id.id;
+  let sql = `SELECT * FROM movie_views WHERE movie_id = '${movieId}' AND user_id = '${userId}'`;
+  db.query(sql, (err, result) => {
+      if (result.length) {
+          sql = `UPDATE movie_views SET nb_views = nb_views + 1 WHERE movie_id = '${movieId}' AND user_id = '${userId}' `;
+          db.query(sql, (err, result) => {
+            if (err) {
+              console.log(err);
+            }
+            else {
+                res.send(result);
+            }
+          });
+      }
+      else {
+        sql = `INSERT INTO movie_views (movie_id, user_id, nb_views) VALUES ('${movieId}', '${userId}', 1) `;
+        db.query(sql, (err, result) => {
+          if (err) {
+            console.log(err);
+          }
+          else {
+              res.send(result);
+          }
+        });
+      }
+  })
+});
 
 module.exports = {
     register,
@@ -152,5 +198,7 @@ module.exports = {
     getUserInfo,
     updateUser,
     addToFavs,
-    getFavs
+    getFavs,
+    addView,
+    getNbView
 }
