@@ -29,9 +29,10 @@ const register = ((req, res) => {
                 console.log(err);
               }
               else {
+                console.log(result);
                 const token = sign({id: result.insertId, email: email}, 'mysecretToken');
                 //res.send({message: 'The user has been registered'});
-                res.send(result);
+                res.send(token);
               }
             });
           }
@@ -85,7 +86,7 @@ const getUserInfo = ((req, res) => {
 })
 
 const updateUser = ((req, res) => {
-  const id = req.id.id;
+  const id = req.body.id
   const firstName = req.body.firstName;
   const lastName = req.body.lastName;
   const email = req.body.email;
@@ -99,7 +100,7 @@ const updateUser = ((req, res) => {
       return res.send({message: error});
     } 
     else {
-      sql = `UPDATE users SET firstName = ${firstName}, lastName = ${lastName}, email = ${email}, password = ${password}, adress = ${address}, city = ${city}, zipCode = ${zipCode}, profile = ${profile}) WHERE id = ${id}`;
+      sql = `UPDATE users SET firstName = '${firstName}', lastName = '${lastName}', email = '${email}', password = '${password}', adress = '${address}', city = '${city}', zipCode = '${zipCode}', profile = '${profile}' WHERE id = '${id}'`;
       db.query(sql, (err, result) => {
         if (err) {
           console.log(err);
@@ -115,5 +116,6 @@ const updateUser = ((req, res) => {
 module.exports = {
     register,
     login,
-    getUserInfo
+    getUserInfo,
+    updateUser
 }
