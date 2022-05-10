@@ -39,7 +39,7 @@ function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container-fluid">
-        <Link className="navbar-brand" to="/dashboard">
+        <Link className="navbar-brand" to="/dashboard" state={data}>
           Netfrick
         </Link>
         <button

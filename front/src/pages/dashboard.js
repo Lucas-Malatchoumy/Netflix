@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useLocation, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import Category from "../components/movieByCat";
@@ -8,9 +9,14 @@ function Dashboard() {
   const [movies, setMovies] = useState([]);
   const [categories, setCategories] = useState([]);
   const [nbMoviesWatch, setnbMoviesWatch] = useState([]);
+  const [favs, setFavs] = useState([]);
+  let location = useLocation()
+  console.log(location);
+  let data = location.state;
 
   useEffect(() => {
     getMovies();
+    getFavs();
   }, []);
 
   useEffect(() => {
@@ -24,6 +30,15 @@ function Dashboard() {
         setCategories(response.data);
       });
   }
+
+  function getFavs() {
+    axios
+      .get(`http://localhost:3001/Netflix/user/getFiveFavs/${data.id}`)
+      .then((response) => {
+        setFavs(response.data);
+      });
+  }
+
 
   function nbView() {
     axios
@@ -43,7 +58,18 @@ function Dashboard() {
       });
   }
   return (
-    <div>
+    <div><h1 className="category-title">Your last Favories</h1>
+        <div className="category"><div className="category-movies">
+      {favs.map((movie) => {
+        return (
+          <Link to={`/movies/${movie.id}`}>
+            <div className="card-movie" key={movie.id}>
+            <img src={movie.image}></img>
+            <span>{movie.title}</span>
+          </div>
+          </Link>
+        );
+      })}</div></div>
       <span>{nbMoviesWatch}</span>
       {categories.map((category) => {
         return (

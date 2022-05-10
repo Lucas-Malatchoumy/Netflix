@@ -18,7 +18,7 @@ db.connect(function(err) {
       if (err) throw err;
       console.log("Table created");
     });
-    db.query("CREATE TABLE IF NOT EXISTS users_favs_movies ( id INT AUTO_INCREMENT NOT NULL PRIMARY KEY UNIQUE, user_id INT NOT NULL, movie_id INT NOT NULL, FOREIGN KEY (movie_id) REFERENCES movies(id), FOREIGN KEY (user_id) REFERENCES users(id)) ", function (err, result) {
+    db.query("CREATE TABLE IF NOT EXISTS users_favs_movies ( id INT AUTO_INCREMENT NOT NULL PRIMARY KEY UNIQUE, user_id INT NOT NULL, movie_id INT NOT NULL, currentDate DATETIME NOT NULL, FOREIGN KEY (movie_id) REFERENCES movies(id), FOREIGN KEY (user_id) REFERENCES users(id)) ", function (err, result) {
       if (err) throw err;
       console.log("Table users_fas_movies created");
     });

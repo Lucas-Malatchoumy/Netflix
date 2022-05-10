@@ -117,13 +117,18 @@ const addToFavs = ((req, res) => {
   console.log(req.params);
   const movieId = req.params.movie;
   const userId = req.id.id;
-  let sql = `INSERT INTO users_favs_movies (user_id, movie_id) VALUES ('${userId}', '${movieId}') `;
+  let sql = `SELECT * FROM users_favs_movies WHERE user_id = '${userId}' AND movie_id = '${movieId}'`
   db.query(sql, (err, result) => {
-      if (err) {
-          console.log(err);
-      }
-      else {
-          res.send(result);
+      if (!result.length) {
+        sql = `INSERT INTO users_favs_movies (user_id, movie_id, currentDate) VALUES ('${userId}', '${movieId}', NOW()) ON DUPLICATE KEY UPDATE user_id = user_id, movie_id = movie_id, id = id; `;
+        db.query(sql, (err, result) => {
+          if (err) {
+            console.log(err);
+          }
+          else {
+            res.send(result);
+          }
+        })
       }
   })
 });
@@ -131,7 +136,7 @@ const addToFavs = ((req, res) => {
 const getFavs = ((req, res) => {
   const id = req.params.user;
   console.log(id);
-  let sql = `SELECT movies.title, movies.image, movies.id
+  let sql = `SELECT DISTINCT movies.title, movies.image, movies.id
   FROM users_favs_movies
   INNER JOIN users ON users_favs_movies.user_id = users.id
   INNER JOIN movies ON users_favs_movies.movie_id = movies.id
@@ -145,6 +150,25 @@ const getFavs = ((req, res) => {
       }
   })
 });
+
+const getFiveFavs = ((req, res) => {
+  const id = req.params.user;
+  console.log(id);
+  let sql = `SELECT DISTINCT movies.title, movies.image, movies.id, users_favs_movies.currentDate
+  FROM users_favs_movies
+  INNER JOIN users ON users_favs_movies.user_id = users.id
+  INNER JOIN movies ON users_favs_movies.movie_id = movies.id
+  WHERE users.id = '${id}' ORDER BY users_favs_movies.currentDate DESC LIMIT 5`;
+  db.query(sql, (err, result) => {
+      if (err) {
+          console.log(err);
+      }
+      else {
+          res.send(result);
+      }
+  })
+});
+
 const addView = ((req, res) => {
   console.log(req.params);
   const movieId = req.params.movie;
@@ -201,5 +225,6 @@ module.exports = {
     addToFavs,
     getFavs,
     addView,
-    getNbView
+    getNbView,
+    getFiveFavs
 }
