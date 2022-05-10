@@ -85,22 +85,6 @@ const getUserInfo = ((req, res) => {
     })
 });
 
-const getNbView = ((req, res) => {
-  const userId = req.id.id;
-  let sql = `SELECT COUNT(user_id) AS 'nb' FROM movie_views WHERE user_id = '${userId}';`;
-    db.query(sql, (err, result) => {
-      console.log(result);
-        if (err) {
-          res.send({
-            error: 'nope'
-          })
-        }
-        else {
-          res.send(result);
-        }
-    })
-});
-
 const updateUser = ((req, res) => {
   const id = req.body.id
   const firstName = req.body.firstName;
@@ -191,6 +175,23 @@ const addView = ((req, res) => {
       }
   })
 });
+
+const getNbView = ((req, res) => {
+  const userId = req.id.id;
+  let sql = `SELECT COUNT(user_id) AS 'nb' FROM movie_views WHERE user_id = '${userId}';`;
+    db.query(sql, (err, result) => {
+      console.log(result);
+        if (err) {
+          res.send({
+            error: 'nope'
+          })
+        }
+        else {
+          res.send(result);
+        }
+    })
+});
+
 
 module.exports = {
     register,
