@@ -7,7 +7,6 @@ import axios from "axios";
 function Navbar() {
   const [filter, setFilter] = useState("title");
   const [data, setData] = useState([]);
-  const [searchParams, setSearchParams] = useSearchParams();
   const [search, setSearch] = useState('');
   let navigate = useNavigate();
 
@@ -31,10 +30,6 @@ function Navbar() {
           });
         }
       });
-  }
-  function Search(e) {
-    e.preventDefault(); 
-    setSearchParams({movie: search})
   }
 
   function logOut() {
@@ -92,9 +87,11 @@ function Navbar() {
               aria-label="Search"
               onChange={(event) => { setSearch(event.target.value); }}
             />
-            <button className="btn btn-outline-success" type="submit" onClick={Search}>
-              Search
-            </button>
+            <Link to="/search-results" state={search}>
+                <button className="btn btn-outline-success" type="submit">
+                Search
+                </button>
+            </Link>
           </form>
         </div>
       </div>

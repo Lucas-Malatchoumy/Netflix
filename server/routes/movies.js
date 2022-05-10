@@ -12,7 +12,8 @@ const {
     getMovie,
     getMovies,
     getGenres,
-    getMovieActor
+    getMovieActor,
+    search
 } = require('../controllers/movies')
 
 
@@ -31,5 +32,6 @@ router.get('/mostViewedFilms');
 router.get('/searchByGenre');
 router.get('/searchByTitle');
 router.get('/:movie/actors', getMovieActor)
+router.get('/search/:search', search)
 
 module.exports = router;

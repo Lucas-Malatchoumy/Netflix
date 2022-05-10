@@ -185,6 +185,27 @@ const getGenres = ((req, res) => {
     })
 });
 
+const search = ((req, res) => {
+    const data = req.params.search;
+    console.log(data);
+    let sql = `SELECT movies.id, movies.image, movies.id, genres.genre, movies.title
+    FROM genre_movie
+    INNER JOIN genres ON genre_movie.genre_id = genres.id
+    INNER JOIN movies ON genre_movie.movie_id = movies.id
+    WHERE movies.title LIKE '%${data}%' OR  genres.genre LIKE '%${data}%';`;
+      db.query(sql, (err, result) => {
+          if (err) {
+            res.send({
+              error: 'nope'
+            })
+          }
+          else {
+              console.log(result);
+            res.send(result);
+          }
+      })
+  });
+
 module.exports = {
     getLastMovies,
     getMovies,
@@ -197,5 +218,6 @@ module.exports = {
     getDramaMovies,
     getMovie,
     getGenres,
-    getMovieActor
+    getMovieActor,
+    search
 }

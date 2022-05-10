@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Navigate, useNavigate, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import Category from "../components/movieByCat";
@@ -49,7 +48,7 @@ function Dashboard() {
       {categories.map((category) => {
         return (
           <div className="category" key={category.id}>
-            <Category category={category} />
+            <Category key={category.id} category={category} />
           </div>
         );
       })}

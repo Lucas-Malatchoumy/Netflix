@@ -1,25 +1,29 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, } from "react";
 import { Navigate, useNavigate, Link, useLocation } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
+import Category from "../components/movieByCat";
+import("./categories.css");
 
-function Fav(props) {
-  const category = props.category;
+function Search() {
   const [movies, setMovies] = useState([])
   let location = useLocation()
   console.log(location);
   let data = location.state;
 
   useEffect(() => {
-    getMovies()
-    }, [])
+    getMovies();
+  }, [data]);
 
-    function getMovies() {
-        axios.get(`http://localhost:3001/Netflix/user/getFavs/${data.id}`).then((response) => {
-          setMovies(response.data)
-        });
-    }
+  function getMovies() {
+    axios.get(`http://localhost:3001/Netflix/movies/search/${data}`)
+      .then((response) => {
+        setMovies(response.data);
+      });
+  }
+
   return (
-    <><h1 className="category-title">Your list</h1><div className="category-favoris">
+    <div className="category"><div className="category-movies">
       {movies.map((movie) => {
         return (
           <Link to={`/movies/${movie.id}`}>
@@ -30,7 +34,7 @@ function Fav(props) {
           </Link>
         );
       })}
-    </div></>
+    </div></div>
   );
 }
-export default Fav;
+export default Search;
