@@ -132,11 +132,23 @@ const addToFavs = ((req, res) => {
       }
   })
 });
+const countFavs = ((req, res) => {
+  const userId = req.id.id;
+  let sql = `SELECT COUNT(movie_id) AS 'nb' FROM users_favs_movies WHERE user_id = '${userId}'`;
+  db.query(sql, (err, result) => {
+      if (err) {
+          console.log(err);
+      }
+      else {
+          res.send(result);
+      }
+  })
+});
 
 const getFavs = ((req, res) => {
   const id = req.params.user;
   console.log(id);
-  let sql = `SELECT DISTINCT movies.title, movies.image, movies.id
+  let sql = `SELECT movies.title, movies.image, movies.id
   FROM users_favs_movies
   INNER JOIN users ON users_favs_movies.user_id = users.id
   INNER JOIN movies ON users_favs_movies.movie_id = movies.id
@@ -226,5 +238,6 @@ module.exports = {
     getFavs,
     addView,
     getNbView,
-    getFiveFavs
+    getFiveFavs,
+    countFavs
 }

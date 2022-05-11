@@ -1,20 +1,6 @@
 const db = require('../config');
 
-const getAdventureMovies = ((req, res) => {
-    let sql = `SELECT movies.image, movies.id, genres.genre, movies.title
-    FROM genre_movie
-    INNER JOIN genres ON genre_movie.genre_id = genres.id
-    INNER JOIN movies ON genre_movie.movie_id = movies.id
-    WHERE genre = 'Adventure' ORDER BY RAND () LIMIT 10 ;`;
-    db.query(sql, (err, result) => {
-        if (err) {
-            console.log(err);
-        }
-        else {
-            res.send(result);
-        }
-    })
-});
+
 const getLastMovies = ((req, res) => {
     let sql = `SELECT title, image, id FROM movies ORDER BY currentDate DESC LIMIT 10`;
     db.query(sql, (err, result) => {
@@ -185,6 +171,22 @@ const getGenres = ((req, res) => {
     })
 });
 
+const getmostViewed = ((req, res) => {
+    let sql = `SELECT movies.id, movies.image, movies.title, movie_views.nb_views
+    FROM movie_views
+    INNER JOIN movies ON movie_views.movie_id = movies.id
+    ORDER BY movie_views.nb_views DESC LIMIT 10`;
+    db.query(sql, (err, result) => {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            console.log('il se passe un truc');
+            res.send(result);
+        }
+    })
+});
+
 const search = ((req, res) => {
     const data = req.params.search;
     console.log(data);
@@ -209,15 +211,15 @@ const search = ((req, res) => {
 module.exports = {
     getLastMovies,
     getMovies,
-    getAdventureMovies,
     getActionMovies,
     getFantasticMovies,
     getHorrorMovies,
     getSciFiMovies,
+    getmostViewed,
     getComedyMovies,
     getDramaMovies,
     getMovie,
     getGenres,
     getMovieActor,
-    search
+    search,
 }

@@ -70,9 +70,6 @@ function Navbar() {
                 ></img>
               </Link>
             </li>
-            <li className="mr-3">
-              <span className="nbMovie">Nombre de films regardé : </span>
-            </li>
             <li className="nav-item">
               <button className="btn btn-outline-danger" onClick={logOut}>
                 Log out

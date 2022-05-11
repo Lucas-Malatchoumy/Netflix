@@ -11,7 +11,8 @@ const {
     getFavs,
     addView,
     getNbView,
-    getFiveFavs
+    getFiveFavs,
+    countFavs
 } = require('../controllers/user');
 
 router.post('/register', register);
@@ -21,6 +22,7 @@ router.patch('/update', updateUser)
 router.get('/addToFavs/:movie',checkToken, addToFavs)
 router.get('/getFavs/:user',getFavs);
 router.get('/getFiveFavs/:user',getFiveFavs)
+router.get('/countFavs/',checkToken, countFavs);
 router.get('/addView/:movie', checkToken, addView);
 router.get('/nbView', checkToken, getNbView)
 

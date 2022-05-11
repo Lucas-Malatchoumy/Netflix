@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-function LastMovies(props) {
+function MostViewed() {
   const [movies, setMovies] = useState([])
 
   useEffect(() => {
@@ -9,13 +9,13 @@ function LastMovies(props) {
     }, [])
 
     function getMovies() {
-        axios.get(`http://localhost:3001/Netflix/movies/getlastMovies`).then((response) => {
+        axios.get(`http://localhost:3001/Netflix/movies/getmostView`).then((response) => {
           console.log(response.data);
           setMovies(response.data)
         });
     }
   return (
-    <><h1 className="category-title">Latest Movies</h1><div className="category-movies">
+    <><h1 className="category-title">Most Viewed Movies</h1><div className="category-movies">
       {movies.map((movie) => {
         return (
             <div className="card-movie" key={movie.id}>
@@ -27,4 +27,4 @@ function LastMovies(props) {
     </div></>
   );
 }
-export default LastMovies;
+export default MostViewed;

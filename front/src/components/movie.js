@@ -67,32 +67,34 @@ function Movie(props) {
   }
 
   return (
-    <div key={movie.id} className="movie">
-      <img id="poster" src={movie.image}></img>
-      <div className="info">
-        <h1>
-          {movie.title}({movie.year})
-        </h1>
-        <div className="casting">
-          {casting.map((actor) => {
-            return <span key={actor.id}>{actor.actor} </span>;
-          })}
-          <span> {movie.duration} minutes </span>
-          <span> (-{movie.parental_rating})</span>
-          <span>
-            <MdFavoriteBorder onClick={favs} />
-          </span>
+    <div key={movie.id} className="section">
+      <div className="movie">
+        <img id="poster" src={movie.image}></img>
+        <div className="info">
+          <h1>
+            {movie.title}({movie.year})
+          </h1>
+          <div className="casting">
+            {casting.map((actor) => {
+              return <span key={actor.id}>{actor.actor} </span>;
+            })}
+            <span> {movie.duration} minutes </span>
+            <span> (-{movie.parental_rating})</span>
+            <span>
+              <MdFavoriteBorder onClick={favs} />
+            </span>
+          </div>
+          <h3>Description : </h3>
+          <p className="description">{movie.description}</p>
         </div>
-        <h3>Description : </h3>
-        <p className="description">{movie.description}</p>
-        <ReactPlayer
+      </div>
+      <ReactPlayer
           url="https://youtu.be/_SQVLIqqUww"
           onStart={addView}
           muted
           width="100%"
-          height="100%"
+          height="500px"
         />
-      </div>
     </div>
   );
 }

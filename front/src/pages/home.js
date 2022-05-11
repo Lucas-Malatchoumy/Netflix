@@ -3,6 +3,7 @@ import {Navigate, Outlet} from 'react-router-dom'
 import Navbar from "./homeNav";
 import ReactPlayer from 'react-player'
 import LastMovies from '../components/lastMovies';
+import MostViewed from '../components/mostViewed';
 import ('./home.css')
 
 function Home(props) {
@@ -13,6 +14,7 @@ function Home(props) {
                 <div className='lastMovies'>
                     <h1 className='netfrick'>Netfrick, streaming for the poor</h1>
                     <LastMovies />
+                    <MostViewed />
                 </div>
             </div></>
     )

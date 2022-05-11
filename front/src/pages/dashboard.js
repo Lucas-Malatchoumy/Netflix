@@ -3,14 +3,13 @@ import { useLocation, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import Category from "../components/movieByCat";
+import Footer from "../components/footer";
 import("./categories.css");
 
 function Dashboard() {
-  const [movies, setMovies] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [nbMoviesWatch, setnbMoviesWatch] = useState([]);
   const [favs, setFavs] = useState([]);
-  let location = useLocation()
+  let location = useLocation();
   console.log(location);
   let data = location.state;
 
@@ -18,10 +17,6 @@ function Dashboard() {
     getMovies();
     getFavs();
   }, []);
-
-  useEffect(() => {
-    nbView();
-  }, [nbMoviesWatch]);
 
   function getMovies() {
     axios
@@ -39,38 +34,23 @@ function Dashboard() {
       });
   }
 
-
-  function nbView() {
-    axios
-      .get(`http://localhost:3001/Netflix/user/nbView`, {
-        headers: {
-          token: localStorage.getItem("token"),
-        },
-      })
-      .then((response) => {
-        if (response.data.message) {
-          alert(response.data.message);
-        } else {
-          response.data.forEach((element) => {
-            setnbMoviesWatch(element.nb);
-          });
-        }
-      });
-  }
   return (
-    <div><h1 className="category-title">Your last Favories</h1>
-        <div className="category"><div className="category-movies">
-      {favs.map((movie) => {
-        return (
-          <Link to={`/movies/${movie.id}`}>
-            <div className="card-movie" key={movie.id}>
-            <img src={movie.image}></img>
-            <span>{movie.title}</span>
-          </div>
-          </Link>
-        );
-      })}</div></div>
-      <span>{nbMoviesWatch}</span>
+    <div>
+      <h1 className="category-title">Your last Favories</h1>
+      <div className="category">
+        <div className="category-movies">
+          {favs.map((movie) => {
+            return (
+              <Link to={`/movies/${movie.id}`}>
+                <div className="card-movie" key={movie.id}>
+                  <img src={movie.image}></img>
+                  <span>{movie.title}</span>
+                </div>
+              </Link>
+            );
+          })}
+        </div>
+      </div>
       {categories.map((category) => {
         return (
           <div className="category" key={category.id}>
@@ -78,6 +58,7 @@ function Dashboard() {
           </div>
         );
       })}
+      <Footer />
     </div>
   );
 }
