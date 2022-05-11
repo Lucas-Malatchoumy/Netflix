@@ -35,18 +35,18 @@
     text-decoration: none;
     overflow: scroll;
 }
-.category-favoris {
-    display: flex;
-    flex-direction: row;
-    text-decoration: none;
-    flex-wrap: wrap;
-}
+
 a {
     text-decoration: none;
-    color: black;
+    color: white;
+    transition: 0.2s;
+}
+a:hover {
+    color: red;
 }
 .category-title {
     margin-bottom: 20px;
+    color: red;
 }
 img {
     max-width: 300px;
@@ -76,15 +76,18 @@ img {
   }
   .modal-input {
     width: 90%;
+    margin-left: 50%;
+    margin-top: 100px;
+    padding: 40px 20px 60px 20px;
     max-width: 500px;
     min-width: 300px;
     padding: 30px;
-    background: white;
+    background: black;
     position: absolute;
-    left: 25%;
     transform: translate(-50%, -50%);
     border-radius: 5px;
     top: 40%;
+    
   }
   .nbMovie {
       color: white;

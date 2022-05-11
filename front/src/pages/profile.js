@@ -36,8 +36,8 @@ const [ modal, setModal ] = useState(false);
     }
 
   return (
-    <form className="register">
-      <div className="form-row">
+    <form className="profile">
+      <div className="form-row text-light form-outline form-white">
         <div className="form-group col-md-6">
           <label>First name</label>
           <input type="text" className="form-control" value={data.firstName} readOnly />
@@ -47,17 +47,15 @@ const [ modal, setModal ] = useState(false);
           <input type="text" className="form-control" value={data.lastName} readOnly />
         </div>
       </div>
-      <div className="form-row">
-        <div className="form-group col-md-6">
-          <label>Email</label>
-          <input type="email" className="form-control" value={data.email}  />
-        </div>
+      <div className="form-group text-light form-outline form-white">
+        <label>Email</label>
+        <input type="email" className="form-control" value={data.email}  />
       </div>
-      <div className="form-group">
+      <div className="form-group text-light form-outline form-white">
         <label >Address</label>
         <input type="text" className="form-control" value={data.adress} readOnly />
       </div>
-      <div className="form-row">
+      <div className="form-row text-light form-outline form-white">
         <div className="form-group col-md-6">
           <label>City</label>
           <input type="text" className="form-control" value={data.city} readOnly />
@@ -71,7 +69,9 @@ const [ modal, setModal ] = useState(false);
           <input type="text" className="form-control" value={data.zipCode} readOnly />
         </div>
       </div>
-      <button type="submit" className="btn btn-success mt-2" onClick={toggleModal}>Modify</button>
+      <div class="d-grid gap-2 mt-3">
+        <button type="submit" className="btn btn-warning mt-2" onClick={toggleModal}>Modify</button>
+      </div>
       {modal && <Modal setModal={setModal} data={data} />}
   </form>
   );

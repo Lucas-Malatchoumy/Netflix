@@ -56,8 +56,8 @@ function Dashboard() {
 
   return (
     <div>
-      <h1 className="category-title">Your last Favories</h1>
       <div className="category">
+      <h1 className="category-title">Your last Favories</h1>
         <div className="category-movies">
           {favs.map((movie) => {
             return (

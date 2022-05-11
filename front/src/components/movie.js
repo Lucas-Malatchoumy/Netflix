@@ -5,7 +5,7 @@ import { MdFavoriteBorder } from "react-icons/md";
 import ReactPlayer from "react-player";
 import("./movie.css");
 
-function Movie(props) {
+function Movie() {
   const { movieId } = useParams();
   const [movie, setMovie] = useState([]);
   const [casting, setCasting] = useState([]);

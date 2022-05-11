@@ -19,17 +19,21 @@ function Fav(props) {
         });
     }
   return (
-    <><h1 className="category-title">Your list</h1><div className="category-favoris">
-      {movies.map((movie) => {
-        return (
-          <Link to={`/movies/${movie.id}`}>
-            <div className="card-movie" key={movie.id}>
-            <img src={movie.image}></img>
-            <span>{movie.title}</span>
-          </div>
-          </Link>
-        );
-      })}
+    <><h1 className="category-title">Your list</h1><div className="category-favoris container">
+      <div className="row">
+        {movies.map((movie) => {
+          return (
+            <div className="col-md-3 mt-3 mb-3">
+              <Link to={`/movies/${movie.id}`}>
+              <div className="card-movie" key={movie.id}>
+               <img src={movie.image}></img>
+               <span>{movie.title}</span>
+               </div>
+             </Link>
+            </div>
+          );
+        })}
+      </div>
     </div></>
   );
 }

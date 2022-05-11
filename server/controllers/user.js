@@ -15,7 +15,7 @@ const register = ((req, res) => {
     db.query(sql, (err, result) => {
       if (result.length >= 1) {
         console.log(result);
-        return res.send({message: 'This user already exist'});
+        return res.send({error: 'This user already exist'});
       }
       else {
         bcrypt.hash(password, 10, (err, hash) => {
@@ -26,7 +26,7 @@ const register = ((req, res) => {
             sql = "INSERT INTO users (firstName, lastName, email, password, adress, city, zipCode, profile) VALUES (?,?,?,?,?,?,?,?)";
             db.query(sql, [firstName, lastName, email, hash, address, city, zipCode, profile], (err, result) => {
               if (err) {
-                console.log(err);
+                res.send({error: 'some values are incorrect'});
               }
               else {
                 console.log(result);

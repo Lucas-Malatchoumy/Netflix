@@ -23,15 +23,19 @@ function Search() {
   }
 
   return (
-    <div className="category"><div className="category-movies">
+    <div className="container">
+      <h1 className="category-title">Results : </h1>
+      <div className="row">
       {movies.map((movie) => {
         return (
-          <Link to={`/movies/${movie.id}`}>
+          <div className="col-md-3 mt-3 mb-3">
+            <Link to={`/movies/${movie.id}`}>
             <div className="card-movie" key={movie.id}>
-            <img src={movie.image}></img>
-            <span>{movie.title}</span>
+             <img src={movie.image}></img>
+             <span>{movie.title}</span>
+            </div>
+           </Link>
           </div>
-          </Link>
         );
       })}
     </div></div>
