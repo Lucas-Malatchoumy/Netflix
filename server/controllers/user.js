@@ -133,7 +133,7 @@ const addToFavs = ((req, res) => {
   })
 });
 const countFavs = ((req, res) => {
-  const userId = req.id.id;
+  const userId = req.params.user;
   let sql = `SELECT COUNT(movie_id) AS 'nb' FROM users_favs_movies WHERE user_id = '${userId}'`;
   db.query(sql, (err, result) => {
       if (err) {
@@ -213,7 +213,7 @@ const addView = ((req, res) => {
 });
 
 const getNbView = ((req, res) => {
-  const userId = req.id.id;
+  const userId = req.params.user;
   let sql = `SELECT COUNT(user_id) AS 'nb' FROM movie_views WHERE user_id = '${userId}';`;
     db.query(sql, (err, result) => {
       console.log(result);

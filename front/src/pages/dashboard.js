@@ -9,14 +9,34 @@ import("./categories.css");
 function Dashboard() {
   const [categories, setCategories] = useState([]);
   const [favs, setFavs] = useState([]);
-  let location = useLocation();
-  console.log(location);
-  let data = location.state;
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     getMovies();
-    getFavs();
   }, []);
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  function getData() {
+    axios
+      .get("http://localhost:3001/Netflix/user/profile", {
+        headers: {
+          token: localStorage.getItem("token"),
+        },
+      })
+      .then((response) => {
+        if (response.data.error) {
+          console.log(response.data.error);
+        } else {
+          response.data.forEach((element) => {
+            setData(element);
+            getFavs(element);
+          });
+        }
+      });
+  }
 
   function getMovies() {
     axios
@@ -26,9 +46,9 @@ function Dashboard() {
       });
   }
 
-  function getFavs() {
+  function getFavs(element) {
     axios
-      .get(`http://localhost:3001/Netflix/user/getFiveFavs/${data.id}`)
+      .get(`http://localhost:3001/Netflix/user/getFiveFavs/${element.id}`)
       .then((response) => {
         setFavs(response.data);
       });
@@ -58,7 +78,7 @@ function Dashboard() {
           </div>
         );
       })}
-      <Footer />
+      <Footer user={data.id}/>
     </div>
   );
 }

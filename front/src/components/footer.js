@@ -2,21 +2,18 @@ import React, { useState, useEffect } from "react";
 import { Navigate, useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 
-function Footer() {
+function Footer(props) {
   const [nbMoviesWatch, setnbMoviesWatch] = useState([]);
   const [nbMFavs, setNbFavs] = useState([]);
+  const user = props.user;
 
   useEffect(() => {
     getInfo();
-  }, [nbMoviesWatch, nbMFavs]);
+  },);
 
     function getInfo() {
         axios
-          .get(`http://localhost:3001/Netflix/user/nbView`, {
-            headers: {
-              token: localStorage.getItem("token"),
-            },
-          })
+          .get(`http://localhost:3001/Netflix/user/nbView/${user}`)
           .then((response) => {
             if (response.data.message) {
               alert(response.data.message);
@@ -27,11 +24,7 @@ function Footer() {
             }
           });
           axios
-          .get(`http://localhost:3001/Netflix/user/countFavs`, {
-            headers: {
-              token: localStorage.getItem("token"),
-            },
-          })
+          .get(`http://localhost:3001/Netflix/user/countFavs/${user}`)
           .then((response) => {
             if (response.data.message) {
               alert(response.data.message);

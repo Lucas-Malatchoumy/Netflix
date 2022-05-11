@@ -181,7 +181,6 @@ const getmostViewed = ((req, res) => {
             console.log(err);
         }
         else {
-            console.log('il se passe un truc');
             res.send(result);
         }
     })
