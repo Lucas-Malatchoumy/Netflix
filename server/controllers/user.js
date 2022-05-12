@@ -100,7 +100,8 @@ const updateUser = ((req, res) => {
       return res.send({message: error});
     } 
     else {
-      sql = `UPDATE users SET firstName = '${firstName}', lastName = '${lastName}', email = '${email}', password = '${password}', adress = '${address}', city = '${city}', zipCode = '${zipCode}', profile = '${profile}' WHERE id = '${id}'`;
+      sql = `UPDATE users SET firstName = IF('${firstName}' = '', firstNAme, '${firstName}'), lastName = IF('${lastName}' = '', lastName, '${lastName}'), email = IF('${email}' = '', email,
+       '${email}'), password = IF('${password}' = '', password, '${password}'), adress = IF('${address}' = '', adress, '${address}'), city = IF('${city}' = '', city, '${city}'), zipCode = IF('${zipCode}' = '', zipCode, '${zipCode}'), profile = IF('${profile}' = '', profile, '${profile}') WHERE id = '${id}'`;
       db.query(sql, (err, result) => {
         if (err) {
           console.log(err);

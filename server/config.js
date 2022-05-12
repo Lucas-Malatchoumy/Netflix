@@ -51,21 +51,21 @@ db.connect(function(err) {
         if (err) throw err;
         console.log("Table movie_views created");
       });
-      
-    const genres  = require('./genres.json');
-
+    
+    const ratings = [3,4,5];
     const parental_ratings = [10, 12, 16, 18];
     movies.forEach((element, i) => {
       setTimeout( () => {
           let sql = `INSERT INTO movies (id, title, description, image, year, duration, currentDate, parental_rating) VALUES (?,?,?,?,?,?,NOW(),?) ON DUPLICATE KEY UPDATE id = id;`
           let parental_rating = parental_ratings[Math.floor(Math.random()*parental_ratings.length)];
+          let rating = ratings[Math.floor(Math.random()*ratings.length)];
           db.query(sql, [element.id, element.title, element.plot, element.posterUrl, element.year, element.runtime, parental_rating], (err, result) => {
             if (err) {
               console.log(err)
             }
             else {
                 let movie_id;
-                let sql = `SELECT id FROM movies WHERE id = '${element.id}' `;
+                sql = `SELECT id FROM movies WHERE id = '${element.id}' `;
                 db.query(sql, (err, result) => {
                     if (err) {
                     console.log(err)
@@ -96,9 +96,9 @@ db.connect(function(err) {
                         })
                     }
                 })
-            }
+            };
           });
-        }, i * 1000);
+        }, i * 1);
     })
   });
 
