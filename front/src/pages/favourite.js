@@ -19,7 +19,8 @@ function Fav(props) {
         });
     }
   return (
-    <><h1 className="category-title">Your list</h1><div className="category-favoris container">
+    <><div className="category-favoris container">
+      <h1 className="category-title">Your list</h1>
       <div className="row">
         {movies.map((movie) => {
           return (

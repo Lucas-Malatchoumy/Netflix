@@ -19,9 +19,9 @@ function MostViewed() {
       {movies.map((movie) => {
         return (
             <div className="card-movie" key={movie.id}>
-            <img src={movie.image}></img>
-            <span>{movie.title}</span>
-          </div>
+             <img src={movie.image}></img>
+             <span>{movie.title}</span>
+            </div>
         );
       })}
     </div></>

@@ -28,6 +28,13 @@
     margin-right: 10px;
     align-items: center;
     text-align: center;
+    transition: transform .2s;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.card-movie:hover {
+    transform: scale(1.1)
 }
 .category-movies {
     display: flex;
@@ -92,3 +99,7 @@ img {
   .nbMovie {
       color: white;
   }
+
+.stats {
+  background-color: #343a40;
+}
