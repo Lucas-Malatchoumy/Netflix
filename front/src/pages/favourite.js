@@ -3,10 +3,8 @@ import { Navigate, useNavigate, Link, useLocation } from "react-router-dom";
 import axios from "axios";
 
 function Fav(props) {
-  const category = props.category;
   const [movies, setMovies] = useState([])
   let location = useLocation()
-  console.log(location);
   let data = location.state;
 
   useEffect(() => {

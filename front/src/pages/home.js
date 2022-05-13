@@ -15,7 +15,7 @@ function Home(props) {
                     <MostViewed />
                 </div>
             </div><div className="video">
-            <ReactPlayer url='https://youtu.be/_SQVLIqqUww' playing muted width="100%" height="100%" />
+            <ReactPlayer url='https://youtu.be/_SQVLIqqUww' playing muted width="100%" height="500px" />
         </div></>
     )
 }

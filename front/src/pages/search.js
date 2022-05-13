@@ -8,7 +8,6 @@ import("./categories.css");
 function Search() {
   const [movies, setMovies] = useState([])
   let location = useLocation()
-  console.log(location);
   let data = location.state;
 
   useEffect(() => {

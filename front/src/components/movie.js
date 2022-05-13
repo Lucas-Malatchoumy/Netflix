@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { MdFavoriteBorder } from "react-icons/md";
+import { RiStarSFill } from "react-icons/ri";
 import ReactPlayer from "react-player";
 import("./movie.css");
 

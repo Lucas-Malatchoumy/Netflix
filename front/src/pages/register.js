@@ -54,39 +54,39 @@ function Form(props) {
       <div className="form-row text-light form-outline form-white">
         <div className="form-group col-md-6">
           <label htmlFor="inputFirstNAme">First name</label>
-          <input type="text" className="input form-control bg-dark" onChange={(event) => { setFirstName(event.target.value); setError("") } } />
+          <input type="text" className="input form-control bg-dark" value={firstName} onChange={(event) => { setFirstName(event.target.value); setError("") } } />
         </div>
         <div className="form-group col-md-6">
           <label htmlFor="inputLastNAme">Last name</label>
-          <input type="text" className="input form-control bg-dark" id="inputZip" onChange={(event) => { setLastName(event.target.value); setError("") } } />
+          <input type="text" className="input form-control bg-dark" value={lastName} onChange={(event) => { setLastName(event.target.value); setError("") } } />
         </div>
       </div>
       <div className="form-row text-light form-outline form-white">
         <div className="form-group col-md-6">
           <label htmlFor="inputEmail4">Email</label>
-          <input type="email" className="input form-control bg-dark" id="inputEmail4" placeholder="Email" onChange={(event) => { setEmail(event.target.value); setError("") } } />
+          <input type="email" className="input form-control bg-dark" value={email} placeholder="Email" onChange={(event) => { setEmail(event.target.value); setError("") } } />
         </div>
         <div className="form-group col-md-6">
           <label htmlFor="inputPassword4">Password</label>
-          <input type="password" className="input form-control bg-dark" id="inputPassword4" placeholder="Password" onChange={(event) => { setPassword(event.target.value); setError("") } } />
+          <input type="password" className="input form-control bg-dark" value={password} placeholder="Password" onChange={(event) => { setPassword(event.target.value); setError("") } } />
         </div>
       </div>
       <div className="form-group text-light form-outline form-white">
         <label htmlFor="inputAddress">Address</label>
-        <input type="text" className="input form-control bg-dark" id="inputAddress" onChange={(event) => { setAddress(event.target.value); setError("") } }  />
+        <input type="text" className="input form-control bg-dark" value={address} onChange={(event) => { setAddress(event.target.value); setError("") } }  />
       </div>
       <div className="form-row text-light form-outline form-white">
         <div className="form-group col-md-6">
           <label htmlFor="inputCity">City</label>
-          <input type="text" className="input form-control bg-dark" id="inputCity" onChange={(event) => { setCity(event.target.value); setError("") } } />
+          <input type="text" className="input form-control bg-dark" value={city} onChange={(event) => { setCity(event.target.value); setError("") } } />
         </div>
         <div className="form-group col-md-4">
           <label htmlFor="inputState">Profile</label>
-          <input type="text" className="input form-control bg-dark" onChange={(event) => { setProfile(event.target.value); setError("") } } />
+          <input type="text" className="input form-control bg-dark" value={profile} onChange={(event) => { setProfile(event.target.value); setError("") } } />
         </div>
         <div className="form-group col-md-2">
           <label htmlFor="inputZip">Zip</label>
-          <input type="text" className="input form-control bg-dark" onChange={(event) => { setZipCode(event.target.value); setError("") } } />
+          <input type="text" className="input form-control bg-dark" value={zipCode} onChange={(event) => { setZipCode(event.target.value); setError("") } } />
         </div>
       </div>
       <div class="d-grid gap-2 mt-3">

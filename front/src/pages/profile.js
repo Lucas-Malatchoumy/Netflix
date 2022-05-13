@@ -40,33 +40,33 @@ const [ modal, setModal ] = useState(false);
       <div className="form-row text-light form-outline form-white">
         <div className="form-group col-md-6">
           <label>First name</label>
-          <input type="text" className="form-control" value={data.firstName} readOnly />
+          <input type="text" className="input form-control bg-dark" value={data.firstName} readOnly />
         </div>
         <div className="form-group col-md-6">
           <label>Last name</label>
-          <input type="text" className="form-control" value={data.lastName} readOnly />
+          <input type="text" className="input form-control bg-dark" value={data.lastName} readOnly />
         </div>
       </div>
       <div className="form-group text-light form-outline form-white">
         <label>Email</label>
-        <input type="email" className="form-control" value={data.email}  />
+        <input type="email" className="input form-control bg-dark" value={data.email}  />
       </div>
       <div className="form-group text-light form-outline form-white">
         <label >Address</label>
-        <input type="text" className="form-control" value={data.adress} readOnly />
+        <input type="text" className="input form-control bg-dark" value={data.adress} readOnly />
       </div>
       <div className="form-row text-light form-outline form-white">
         <div className="form-group col-md-6">
           <label>City</label>
-          <input type="text" className="form-control" value={data.city} readOnly />
+          <input type="text" className="input form-control bg-dark" value={data.city} readOnly />
         </div>
         <div className="form-group col-md-4">
           <label>Profile</label>
-          <input type="text" className="form-control" value={data.profile} readOnly />
+          <input type="text" className="input form-control bg-dark" value={data.profile} readOnly />
         </div>
         <div className="form-group col-md-2">
           <label>Zip</label>
-          <input type="text" className="form-control" value={data.zipCode} readOnly />
+          <input type="text" className="input form-control bg-dark" value={data.zipCode} readOnly />
         </div>
       </div>
       <div class="d-grid gap-2 mt-3">

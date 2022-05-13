@@ -12,6 +12,7 @@ import Search from './pages/search';
 import ProtectedRoutes from './components/privateRoute';
 
 function App() {
+
   return (
     <div className="App">
       <Routes>

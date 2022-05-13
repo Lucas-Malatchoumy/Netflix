@@ -29,7 +29,7 @@ const register = ((req, res) => {
                 res.send({error: 'some values are incorrect'});
               }
               else {
-                console.log(result);
+                //console.log(result);
                 const token = sign({id: result.insertId, email: email}, 'mysecretToken');
                 //res.send({message: 'The user has been registered'});
                 res.send(token);
@@ -76,10 +76,11 @@ const getUserInfo = ((req, res) => {
     db.query(sql, (err, result) => {
         if (err) {
           res.send({
-            error: 'nope'
+            error: 'nopessss'
           })
         }
         else {
+          console.log(result);
           res.send(result);
         }
     })

@@ -1,6 +1,6 @@
 .App {
     background-color: black;
-    min-height: 700px;
+    min-height: 869px;
 }
 
 .lastMovies {
@@ -83,9 +83,4 @@
 .nav-item {
     margin-right: 0.125rem;
     margin-left: 0.125rem;
-}
-.navbar {
-    z-index: 2;
-    position: fixed;
-    width: 100%;
 }

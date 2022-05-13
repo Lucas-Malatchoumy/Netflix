@@ -34,7 +34,7 @@
 }
 
 .card-movie:hover {
-    transform: scale(1.1)
+    transform: scale(1.02)
 }
 .category-movies {
     display: flex;
@@ -102,4 +102,7 @@ img {
 
 .stats {
   background-color: #343a40;
+}
+.star {
+    color: #E5C109;
 }
