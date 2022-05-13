@@ -13,101 +13,101 @@ const getLastMovies = ((req, res) => {
     })
 });
 
-const getActionMovies = ((req, res) => {
-    let sql = `SELECT movies.image, movies.id genres.genre, movies.title
-    FROM genre_movie
-    INNER JOIN genres ON genre_movie.genre_id = genres.id
-    INNER JOIN movies ON genre_movie.movie_id = movies.id
-    WHERE genre = 'Action' ORDER BY RAND () LIMIT 10 ;`;
-    db.query(sql, (err, result) => {
-        if (err) {
-            console.log(err);
-        }
-        else {
-            res.send(result);
-        }
-    })
-});
+// const getActionMovies = ((req, res) => {
+//     let sql = `SELECT movies.image, movies.id genres.genre, movies.title
+//     FROM genre_movie
+//     INNER JOIN genres ON genre_movie.genre_id = genres.id
+//     INNER JOIN movies ON genre_movie.movie_id = movies.id
+//     WHERE genre = 'Action' ORDER BY RAND () LIMIT 10 ;`;
+//     db.query(sql, (err, result) => {
+//         if (err) {
+//             console.log(err);
+//         }
+//         else {
+//             res.send(result);
+//         }
+//     })
+// });
 
-const getHorrorMovies = ((req, res) => {
-    let sql = `SELECT movies.image, movies.id genres.genre, movies.title
-    FROM genre_movie
-    INNER JOIN genres ON genre_movie.genre_id = genres.id
-    INNER JOIN movies ON genre_movie.movie_id = movies.id
-    WHERE genre = 'Horror' ORDER BY RAND () LIMIT 10 ;`;
-    db.query(sql, (err, result) => {
-        if (err) {
-            console.log(err);
-        }
-        else {
-            res.send(result);
-        }
-    })
-});
+// const getHorrorMovies = ((req, res) => {
+//     let sql = `SELECT movies.image, movies.id genres.genre, movies.title
+//     FROM genre_movie
+//     INNER JOIN genres ON genre_movie.genre_id = genres.id
+//     INNER JOIN movies ON genre_movie.movie_id = movies.id
+//     WHERE genre = 'Horror' ORDER BY RAND () LIMIT 10 ;`;
+//     db.query(sql, (err, result) => {
+//         if (err) {
+//             console.log(err);
+//         }
+//         else {
+//             res.send(result);
+//         }
+//     })
+// });
 
-const getFantasticMovies = ((req, res) => {
-    let sql = `SELECT movies.image, movies.id genres.genre, movies.title
-    FROM genre_movie
-    INNER JOIN genres ON genre_movie.genre_id = genres.id
-    INNER JOIN movies ON genre_movie.movie_id = movies.id
-    WHERE genre = 'Fantasy' ORDER BY RAND () LIMIT 10 ;`;
-    db.query(sql, (err, result) => {
-        if (err) {
-            console.log(err);
-        }
-        else {
-            res.send(result);
-        }
-    })
-});
+// const getFantasticMovies = ((req, res) => {
+//     let sql = `SELECT movies.image, movies.id genres.genre, movies.title
+//     FROM genre_movie
+//     INNER JOIN genres ON genre_movie.genre_id = genres.id
+//     INNER JOIN movies ON genre_movie.movie_id = movies.id
+//     WHERE genre = 'Fantasy' ORDER BY RAND () LIMIT 10 ;`;
+//     db.query(sql, (err, result) => {
+//         if (err) {
+//             console.log(err);
+//         }
+//         else {
+//             res.send(result);
+//         }
+//     })
+// });
 
-const getSciFiMovies = ((req, res) => {
-    let sql = `SELECT movies.image, movies.id genres.genre, movies.title
-    FROM genre_movie
-    INNER JOIN genres ON genre_movie.genre_id = genres.id
-    INNER JOIN movies ON genre_movie.movie_id = movies.id
-    WHERE genre = 'Sci-Fi' ORDER BY RAND () LIMIT 10 ;`;
-    db.query(sql, (err, result) => {
-        if (err) {
-            console.log(err);
-        }
-        else {
-            res.send(result);
-        }
-    })
-});
+// const getSciFiMovies = ((req, res) => {
+//     let sql = `SELECT movies.image, movies.id genres.genre, movies.title
+//     FROM genre_movie
+//     INNER JOIN genres ON genre_movie.genre_id = genres.id
+//     INNER JOIN movies ON genre_movie.movie_id = movies.id
+//     WHERE genre = 'Sci-Fi' ORDER BY RAND () LIMIT 10 ;`;
+//     db.query(sql, (err, result) => {
+//         if (err) {
+//             console.log(err);
+//         }
+//         else {
+//             res.send(result);
+//         }
+//     })
+// });
 
-const getDramaMovies = ((req, res) => {
-    let sql = `SELECT movies.image, movies.id genres.genre, movies.title
-    FROM genre_movie
-    INNER JOIN genres ON genre_movie.genre_id = genres.id
-    INNER JOIN movies ON genre_movie.movie_id = movies.id
-    WHERE genre = 'Drama' ORDER BY RAND () LIMIT 10 ;`;
-    db.query(sql, (err, result) => {
-        if (err) {
-            console.log(err);
-        }
-        else {
-            res.send(result);
-        }
-    })
-});
+// const getDramaMovies = ((req, res) => {
+//     let sql = `SELECT movies.image, movies.id genres.genre, movies.title
+//     FROM genre_movie
+//     INNER JOIN genres ON genre_movie.genre_id = genres.id
+//     INNER JOIN movies ON genre_movie.movie_id = movies.id
+//     WHERE genre = 'Drama' ORDER BY RAND () LIMIT 10 ;`;
+//     db.query(sql, (err, result) => {
+//         if (err) {
+//             console.log(err);
+//         }
+//         else {
+//             res.send(result);
+//         }
+//     })
+// });
 
-const getComedyMovies = ((req, res) => {
-    let sql = `SELECT movies.image, movies.id genres.genre, movies.title
-    FROM genre_movie
-    INNER JOIN genres ON genre_movie.genre_id = genres.id
-    INNER JOIN movies ON genre_movie.movie_id = movies.id
-    WHERE genre = 'Comedy' ORDER BY RAND () LIMIT 10 ;`;
-    db.query(sql, (err, result) => {
-        if (err) {
-            console.log(err);
-        }
-        else {
-            res.send(result);
-        }
-    })
-});
+// const getComedyMovies = ((req, res) => {
+//     let sql = `SELECT movies.image, movies.id genres.genre, movies.title
+//     FROM genre_movie
+//     INNER JOIN genres ON genre_movie.genre_id = genres.id
+//     INNER JOIN movies ON genre_movie.movie_id = movies.id
+//     WHERE genre = 'Comedy' ORDER BY RAND () LIMIT 10 ;`;
+//     db.query(sql, (err, result) => {
+//         if (err) {
+//             console.log(err);
+//         }
+//         else {
+//             res.send(result);
+//         }
+//     })
+// });
 
 const getMovie = ((req, res) => {
     const id = req.params.movie;
@@ -166,7 +166,7 @@ const getGenres = ((req, res) => {
             console.log(err);
         }
         else {
-            res.send(result);
+            res.status(200).json(result);
         }
     })
 });
@@ -193,7 +193,7 @@ const search = ((req, res) => {
     FROM genre_movie
     INNER JOIN genres ON genre_movie.genre_id = genres.id
     INNER JOIN movies ON genre_movie.movie_id = movies.id
-    WHERE movies.title LIKE '%${data}%' OR  genres.genre LIKE '%${data}%';`;
+    WHERE movies.title LIKE '%${data}%' OR  genres.genre = '${data}';`;
       db.query(sql, (err, result) => {
           if (err) {
             res.send({
@@ -210,13 +210,7 @@ const search = ((req, res) => {
 module.exports = {
     getLastMovies,
     getMovies,
-    getActionMovies,
-    getFantasticMovies,
-    getHorrorMovies,
-    getSciFiMovies,
     getmostViewed,
-    getComedyMovies,
-    getDramaMovies,
     getMovie,
     getGenres,
     getMovieActor,

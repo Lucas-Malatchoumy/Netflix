@@ -18,9 +18,7 @@ function Footer(props) {
             if (response.data.message) {
               alert(response.data.message);
             } else {
-              response.data.forEach((element) => {
-                setnbMoviesWatch(element.nb);
-              });
+              setnbMoviesWatch(response.data.nb)
             }
           });
           axios

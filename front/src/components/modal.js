@@ -17,7 +17,6 @@ function Modal(props) {
     function handleClick(e) {
         e.preventDefault();
         const data = {
-            id: props.data.id,
             firstName: firstName,
             lastName: lastName,
             email: email,
@@ -27,7 +26,11 @@ function Modal(props) {
             zipCode: zipCode,
             profile: profile
           }
-            axios.patch("http://localhost:3001/Netflix/user/update", data ).then((response) => {
+            axios.patch("http://localhost:3001/Netflix/user/update", data, {
+              headers: {
+                  token: localStorage.getItem('token')
+              }
+            }).then((response) => {
               if (response.data.message) {
                 alert(response.data.message)
               }

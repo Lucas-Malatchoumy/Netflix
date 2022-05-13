@@ -1,11 +1,21 @@
 {
+  "name": "Kalu-back",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx jest ./test --forceExit --detectOpenHandles",
+    "start": "nodemon index.js dev"
+  },
   "devDependencies": {
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
     "express": "^4.18.1",
-    "jest": "^28.1.0",
+    "jest": "^28.1.1",
     "jsonwebtoken": "^8.5.1",
     "mysql2": "^2.3.3",
     "supertest": "^6.2.3"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.1"
   }
 }

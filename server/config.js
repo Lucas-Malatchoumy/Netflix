@@ -1,11 +1,12 @@
 const mysql = require("mysql2");
 const movies = require('./db.json');
+require("dotenv").config();
 
 const db = mysql.createConnection({
-    user: "root",
-    host: "localhost",
-    password: "testMysql",
-    database: "Netflix"
+    user: process.env.DB_USERNAME,
+    host: process.env.DB_HOST,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE
 });
 
 movies.forEach((element) => {
@@ -18,7 +19,7 @@ db.connect(function(err) {
       if (err) throw err;
       console.log("Table created");
     });
-    db.query("CREATE TABLE IF NOT EXISTS users_favs_movies ( id INT AUTO_INCREMENT NOT NULL PRIMARY KEY UNIQUE, user_id INT NOT NULL, movie_id INT NOT NULL, currentDate DATETIME NOT NULL, FOREIGN KEY (movie_id) REFERENCES movies(id), FOREIGN KEY (user_id) REFERENCES users(id)) ", function (err, result) {
+    db.query("CREATE TABLE IF NOT EXISTS users_favs_movies ( id INT AUTO_INCREMENT NOT NULL PRIMARY KEY UNIQUE, user_id INT NOT NULL, movie_id INT NOT NULL, currentDate DATETIME NOT NULL, FOREIGN KEY (movie_id) REFERENCES movies(id), FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE) ", function (err, result) {
       if (err) throw err;
       console.log("Table users_fas_movies created");
     });
@@ -47,7 +48,7 @@ db.connect(function(err) {
         if (err) throw err;
         console.log("Table actors_movie created");
       });
-      db.query("CREATE TABLE IF NOT EXISTS movie_views ( id INT AUTO_INCREMENT NOT NULL PRIMARY KEY UNIQUE, movie_id INT NOT NULL, user_id INT NOT NULL, nb_views INT, FOREIGN KEY (movie_id) REFERENCES movies(id), FOREIGN KEY (user_id) REFERENCES users(id))", function (err, result) {
+      db.query("CREATE TABLE IF NOT EXISTS movie_views ( id INT AUTO_INCREMENT NOT NULL PRIMARY KEY UNIQUE, movie_id INT NOT NULL, user_id INT NOT NULL, nb_views INT, FOREIGN KEY (movie_id) REFERENCES movies(id) ON DELETE CASCADE, FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE)", function (err, result) {
         if (err) throw err;
         console.log("Table movie_views created");
       });

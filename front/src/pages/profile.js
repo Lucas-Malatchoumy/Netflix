@@ -30,6 +30,24 @@ const [ modal, setModal ] = useState(false);
         })
     };
 
+    function deleteUser() {
+      axios.delete("http://localhost:3001/Netflix/user/delete", {
+        headers: {
+            token: localStorage.getItem('token')
+        }
+      }).then((response) => {
+          if (response.data.error) {
+            console.log(response.data.error);
+          }
+          else {
+            response.data.forEach(element => {
+                setData(element);
+                console.log(element);
+            });
+          }
+        })
+    }
+
     function toggleModal(e) {
       e.preventDefault();
       setModal(true);

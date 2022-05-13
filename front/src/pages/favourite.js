@@ -14,6 +14,7 @@ function Fav(props) {
     function getMovies() {
         axios.get(`http://localhost:3001/Netflix/user/getFavs/${data.id}`).then((response) => {
           setMovies(response.data)
+          console.log(response);
         });
     }
   return (

@@ -13,7 +13,7 @@ const useAuth = () =>{
 }
 
 const ProtectedRoutes = () => {
-  const auth=useAuth()
+  const auth = useAuth()
   return auth?<><Navbar /><Outlet /></>: <Navigate to="/home"/>
 }
 
