@@ -193,7 +193,7 @@ const search = ((req, res) => {
     FROM genre_movie
     INNER JOIN genres ON genre_movie.genre_id = genres.id
     INNER JOIN movies ON genre_movie.movie_id = movies.id
-    WHERE movies.title LIKE '%${data}%' OR  genres.genre LIKE '%${data}%';`;
+    WHERE movies.title LIKE '%${data}%' OR  genres.genre = '${data}';`;
       db.query(sql, (err, result) => {
           if (err) {
             res.send({

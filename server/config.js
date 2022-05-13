@@ -1,11 +1,12 @@
 const mysql = require("mysql2");
 const movies = require('./db.json');
+require("dotenv").config();
 
 const db = mysql.createConnection({
-    user: "root",
-    host: "localhost",
-    password: "testMysql",
-    database: "Netflix"
+    user: process.env.DB_USERNAME,
+    host: process.env.DB_HOST,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE
 });
 
 movies.forEach((element) => {
