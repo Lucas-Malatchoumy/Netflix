@@ -21,7 +21,7 @@ function Login(props) {
               setPassword("");
             }
             else {
-              localStorage.setItem('token', response.data)
+              localStorage.setItem('token', response.data.token)
               navigate('/dashboard');
             }
         })
@@ -34,14 +34,17 @@ function Login(props) {
       <div className="form-column text-light form-outline form-white">
         <div className="form-group">
           <label>Email</label>
-          <input type="email" className="input form-control form-white bg-dark" value={email} onChange={(event) => { setEmail(event.target.value); setError("") } } />
+          <input type="email" className="input form-control form-white bg-dark" value={email} 
+          onChange={(event) => { setEmail(event.target.value); setError("") } } />
         </div>
         <div className="form-group">
           <label>Password</label>
-          <input type="password" className="input form-control form-white bg-dark" value={password} onChange={(event) => { setPassword(event.target.value); setError("") } } />
+          <input type="password" className="input form-control form-white bg-dark" value={password} 
+          onChange={(event) => { setPassword(event.target.value); setError("") } } />
         </div>
       </div>
-      <button type="submit" className="btn btn-success mt-3" onClick={checkUser}>Login</button>
+      <button type="submit" className="btn btn-success mt-3" 
+      onClick={checkUser}>Login</button>
       {error && <div className="error"> {error} </div>}
   </form>
     </div>

@@ -11,6 +11,9 @@ function Footer(props) {
     getInfo();
   },);
 
+    /**
+     * It gets the number of movies watched by the user and the number of movies in his favorites list
+     */
     function getInfo() {
         axios
           .get(`http://localhost:3001/Netflix/user/nbView/${user}`)
@@ -35,22 +38,13 @@ function Footer(props) {
       }
   return (
     
-    // <div classNameName="footer">
-    //     <div className="text-center p-4">
-    //         Number of movies seen
-    //         <span>{nbMoviesWatch}</span>
-    //         Number of Favories
-    //         <span>{nbMFavs}</span>
-    //         <a className="text-reset fw-bold" href="https://mdbootstrap.com/">MDBootstrap.com</a>
-    //     </div>
-    // </div>
-    <section className="py-24 position-relative mt-5 pb-5">
-  <div className="container">
+<section className="py-24 mt-5 pb-5 pt-4 position-sticky footer">
+  <div className="container mt-5">
     <div className="row">
       <div className=" col-12 col-md-6 mb-8 mb-md-0">
         <div className="py-10 py-md-16 stats shadow">
           <div className="text-center">
-            <p className="mb-1 fw-bold small" style={{color: 'white'}}>Number of movies seen</p>
+            <p className="mb-1 fw-bold" style={{color: 'white'}}>Number of movies watched</p>
             <h2 className="mb-0 lh-sm" style={{color: 'red'}}>{nbMoviesWatch}</h2>
           </div>
         </div>

@@ -13,6 +13,7 @@ function Modal(props) {
     const [address, setAddress] = useState("");
     const [zipCode, setZipCode] = useState("");
     const [profile, setProfile] = useState("");
+    let navigate = useNavigate();
 
     function handleClick(e) {
         e.preventDefault();
@@ -32,14 +33,33 @@ function Modal(props) {
               }
             }).then((response) => {
               if (response.data.message) {
-                alert(response.data.message)
+                alert(response.data.message);
+                props.setModal(false)
               }
               else {
                 window.location.reload(false);
               }
             })
         }
-    return (
+
+
+        function deleteUser() {
+          axios.delete("http://localhost:3001/Netflix/user/delete", {
+            headers: {
+                token: localStorage.getItem('token')
+            }
+          }).then((response) => {
+              if (response.data.error) {
+                console.log(response.data.error);
+              }
+              else {
+                localStorage.removeItem('token');
+                navigate('/home');
+              }
+            })
+        }
+    if (props.btn == 'update') {
+      return (
 
         <div className='modal'>
             <div className='modal-bcg' onClick={() => props.setModal(false)}></div>
@@ -83,10 +103,24 @@ function Modal(props) {
                 </div>
             </div>
             <div class="d-grid gap-2 mt-3">
-              <button type="submit" className="btn btn-danger mt-2" onClick={handleClick} >Update</button>
+              <button type="submit" className="btn btn-warning mt-2" onClick={handleClick} >Update</button>
             </div>
             </form>
         </div>
     )
+    };
+    if (props.btn == 'delete') {
+      return (
+        <div className='modal'>
+        <div className='modal-bcg' onClick={() => props.setModal(false)}></div>
+        <div className="modal-input">
+          <p className="text-center text-white">Are you sure to delete tour account ?</p>
+        <div class="d-grid gap-2 mt-3">
+          <button type="submit" className="btn btn-danger mt-2" onClick={deleteUser} >Delete account</button>
+        </div>
+        </div>
+    </div>
+      )
+    }
 }
 export default Modal;

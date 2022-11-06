@@ -25,7 +25,7 @@ function Fav(props) {
           return (
             <div className="col-md-3 mt-3 mb-3">
               <Link to={`/movies/${movie.id}`}>
-              <div className="card-movie" key={movie.id}>
+              <div className="card-movie ml-3 mr-3" key={movie.id}>
                <img src={movie.image}></img>
                <span>{movie.title}</span>
                </div>

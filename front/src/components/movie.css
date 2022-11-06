@@ -57,7 +57,7 @@ a:hover {
 }
 img {
     max-width: 300px;
-    max-height: 399px;
+    max-height: 250px;
 }
 .casting {
     font-style: italic;
@@ -105,4 +105,8 @@ img {
 }
 .star {
     color: #E5C109;
+}
+.footer {
+    background-color: black;
+    bottom: 0;
 }

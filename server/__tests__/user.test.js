@@ -1,8 +1,8 @@
 const request = require('supertest');
-const {jwt, verify }= require('jsonwebtoken');
+const {verify} = require('jsonwebtoken');
 
 const baseUrl = 'http://127.0.0.1:3001/Netflix/user';
-const mock_user = require('./mock/user');
+const {Newuser, changeuser} = require('./mock/user');
 const user = {
     firstName: null,
     lastName: 'ElRancho',
@@ -13,7 +13,16 @@ const user = {
     zipCode: 'toto',
     profile: 'test.jpg'
 }
-
+const change = {
+    firstName: 'Jean',
+    lastName: 'Luc',
+    email: 'changeuser@gmail.com',
+    password: '12345',
+    address: '',
+    city: '',
+    zipCode: '',
+    profile: ''
+}
 
 
 describe(`${baseUrl}/user/`, () => {
@@ -22,7 +31,7 @@ describe(`${baseUrl}/user/`, () => {
             const res = await request(baseUrl)
             .post('/register')
             .send(user);
-            expect(res.statusCode).toBe(404)
+            expect(res.statusCode).toBe(409)
             expect(JSON.stringify(res.body.error)).toBe(JSON.stringify('This user already exist'))
         }); 
         test("Should return status code 404 and an error because email doesn't have '@'", async () => {
@@ -55,12 +64,13 @@ describe(`${baseUrl}/user/`, () => {
             .post('/register')
             .send(user);
             const array = res.body;
-            mock_user.user.body.id = array.body.id;
-            mock_user.user.body.password = array.body.password;
+            Newuser.body.id = array.body.id;
+            changeuser.body.id = array.body.id;
+            Newuser.body.password = array.body.password;
             expect(res.statusCode).toBe(201)
             expect(JSON.stringify(res.body.message)).toBe(JSON.stringify('The user has been registered'))
-            expect(JSON.stringify(array.body)).toBe(JSON.stringify(mock_user.user.body));
-            mock_user.user.token = res.body.token;
+            expect(JSON.stringify(array.body)).toBe(JSON.stringify(Newuser.body));
+            Newuser.token = res.body.token;
 
         });
     });
@@ -68,34 +78,50 @@ describe(`${baseUrl}/user/`, () => {
         test('Should return status code 401 because email is not registered', async () => {
             const res = await request(baseUrl)
             .post('/login')
-            .send({email: 'toto@gmail.com', password: mock_user.user.body.password});
+            .send({email: 'toto@gmail.com', password: Newuser.body.password});
             expect(res.statusCode).toBe(401)
             expect(JSON.stringify(res.body.error)).toBe(JSON.stringify("User doesn't exist"))
         });
         test('Should return status code 401 because password is incorrect', async () => {
             const res = await request(baseUrl)
             .post('/login')
-            .send({email: mock_user.user.body.email, password: 'lala'});
+            .send({email: Newuser.body.email, password: 'lala'});
             expect(res.statusCode).toBe(401)
             expect(JSON.stringify(res.body.error)).toBe(JSON.stringify("Password is incorrect!"))
         });
         test('Should get user with specific body', async () => {
-            mock_user.user.body.password = '12345';
+            Newuser.body.password = '12345';
             const res = await request(baseUrl)
             .post('/login')
-            .send({email: mock_user.user.body.email, password: mock_user.user.body.password});
+            .send({email: Newuser.body.email, password: Newuser.body.password});
             const goodToken = verify(res.body.token, 'mysecretToken');
-            expect(JSON.stringify(goodToken.id)).toBe(JSON.stringify(mock_user.user.body.id))
+            expect(JSON.stringify(goodToken.id)).toBe(JSON.stringify(Newuser.body.id))
+        });
+    });
+    describe('Update profile/ =>', () => {
+         test('Should error besause token is not passed in headers', async () => {
+            const res = await request(baseUrl)
+            .patch('/update');
+            expect(res.statusCode).toBe(404);
+            expect(JSON.stringify(res.body.error)).toBe(JSON.stringify('not login'))
+        });
+        test('Should dupdate user', async () => {
+            const res = await request(baseUrl)
+            .patch('/update').set('token', Newuser.token).send(change);
+            const array = res.body.body;
+            expect(res.statusCode).toBe(200);
+            expect(JSON.stringify(array)).toBe(JSON.stringify(changeuser.body));
+            expect(JSON.stringify(res.body.message)).toBe(JSON.stringify('user has been updated'))
         });
     });
     describe('DELETE register/ =>', () => {
         test('Should delete user', async () => {
             const res = await request(baseUrl)
-            .delete('/delete').set('token', mock_user.user.token);
+            .delete('/delete').set('token', Newuser.token);
             const array = res.body.result;
-            mock_user.user.body.password = array.password;
+            Newuser.body.password = array.password;
             expect(res.statusCode).toBe(200)
-            expect(JSON.stringify(array)).toBe(JSON.stringify(mock_user.user.body));
+            expect(JSON.stringify(array)).toBe(JSON.stringify(changeuser.body));
             expect(JSON.stringify(res.body.message)).toBe(JSON.stringify('user has been deleted'))
         });
     });

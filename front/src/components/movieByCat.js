@@ -16,18 +16,21 @@ function Category(props) {
         });
     }
   return (
-    <><h1 className="category-title">{category.genre}</h1><div key={category.id} className="category-movies">
+    <div>
+      <h1 className="category-title">{category.genre}</h1>
+      <div key={category.id} className="category-movies">
       {movies.map((movie) => {
         return (
           <Link to={`/movies/${movie.id}`}>
             <div className="card-movie" key={movie.id}>
-            <img src={movie.image}></img>
-            <span>{movie.title}</span>
-          </div>
+              <img src={movie.image}></img>
+              <span>{movie.title}</span>
+            </div>
           </Link>
         );
       })}
-    </div></>
+      </div>
+    </div>
   );
 }
 export default Category;

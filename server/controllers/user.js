@@ -27,7 +27,7 @@ const register = ((req, res) => {
             db.query(sql, [firstName, lastName, email, hash, adress, city, zipCode, profile], (err, result1) => {
               if (err) {
                 console.log(err);
-                res.status(404).json({error: 'some values are incorrect'});
+                return res.json({error: 'some values are incorrect'});
               }
               else {
                 let id = result1.insertId;
@@ -65,20 +65,20 @@ const login = ((req, res) => {
         });
             }
         if (!result.length) {
-            return res.status(401).json({
+            return res.json({
                 error: "User doesn't exist"
             });
         }
         bcrypt.compare(password, result[0].password, (err, check) => {
             if (check === false) {
-                return res.status(401).json({
+                return res.json({
                     error: 'Password is incorrect!'
                 });
             }
             else {
               console.log(result[0].id);
-                const token = sign({id: result[0].id, email: email}, 'mysecretToken');
-                res.status(200).json(token);
+                const token = sign({id: result[0].id, email: email, roleId: result[0].roleId}, 'mysecretToken');
+                res.status(200).json({token});
             }
         })
     })

@@ -1,5 +1,5 @@
 {
-  "name": "Kalu-back",
+  "name": "kaluback",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -16,6 +16,8 @@
     "supertest": "^6.2.3"
   },
   "dependencies": {
-    "dotenv": "^16.0.1"
+    "dotenv": "^16.0.1",
+    "nodemon": "^2.0.19",
+    "pm2": "^5.2.0"
   }
 }

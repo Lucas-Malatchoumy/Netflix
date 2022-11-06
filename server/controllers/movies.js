@@ -2,7 +2,7 @@ const db = require('../config');
 
 
 const getLastMovies = ((req, res) => {
-    let sql = `SELECT title, image, id FROM movies ORDER BY currentDate DESC LIMIT 10`;
+    let sql = `SELECT title, image, id FROM movies ORDER BY currentDate DESC LIMIT 5`;
     db.query(sql, (err, result) => {
         if (err) {
             console.log(err);
@@ -111,16 +111,28 @@ const getLastMovies = ((req, res) => {
 
 const getMovie = ((req, res) => {
     const id = req.params.movie;
-    console.log(req.params);
-    let sql = `SELECT * FROM movies WHERE id = '${id}' `;
+    const user_id = req.id.id
+    let sql = `SELECT id FROM users_favs_movies WHERE user_id = '${user_id}' AND movie_id = ${id}`;
     db.query(sql, (err, result) => {
-        if (err) {
-            console.log(err);
-        }
-        else {
-            res.send(result);
-        }
-    })
+        sql = `SELECT * FROM movies WHERE id = '${id}' `;
+        db.query(sql, (err, result2) => {
+            if (err) {
+                console.log(err);
+            }
+            else {
+                if (result.length) {
+                    const isFav = true;
+                    const movie = result2[0];
+                    res.send({movie, isFav});
+                }
+                else {
+                    const isFav = false;
+                    const movie = result2[0];
+                    res.send({movie, isFav});
+                }
+            }
+        });
+    });
 });
 
 const getMovies = ((req, res) => {

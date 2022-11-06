@@ -7,10 +7,11 @@ import axios from "axios";
 function Profile(props) {
 const [data, setData ] = useState([]);
 const [ modal, setModal ] = useState(false);
+const [btn, setBtn] = useState()
 
     useEffect(() => {
         getData()
-        }, [])
+        })
 
     function getData() {
         axios.get("http://localhost:3001/Netflix/user/profile", {
@@ -29,24 +30,6 @@ const [ modal, setModal ] = useState(false);
             }
         })
     };
-
-    function deleteUser() {
-      axios.delete("http://localhost:3001/Netflix/user/delete", {
-        headers: {
-            token: localStorage.getItem('token')
-        }
-      }).then((response) => {
-          if (response.data.error) {
-            console.log(response.data.error);
-          }
-          else {
-            response.data.forEach(element => {
-                setData(element);
-                console.log(element);
-            });
-          }
-        })
-    }
 
     function toggleModal(e) {
       e.preventDefault();
@@ -67,7 +50,7 @@ const [ modal, setModal ] = useState(false);
       </div>
       <div className="form-group text-light form-outline form-white">
         <label>Email</label>
-        <input type="email" className="input form-control bg-dark" value={data.email}  />
+        <input type="email" className="input form-control bg-dark" value={data.email} readOnly  />
       </div>
       <div className="form-group text-light form-outline form-white">
         <label >Address</label>
@@ -88,9 +71,10 @@ const [ modal, setModal ] = useState(false);
         </div>
       </div>
       <div class="d-grid gap-2 mt-3">
-        <button type="submit" className="btn btn-warning mt-2" onClick={toggleModal}>Modify</button>
+        <button type="submit" className="btn btn-warning mt-2" onClick={(e) => {toggleModal(e); setBtn('update')}}>Modify</button>
+        <button type="submit" className="btn btn-danger mt-2" onClick={(e) => {toggleModal(e); setBtn('delete')}}>Delete</button>
       </div>
-      {modal && <Modal setModal={setModal} data={data} />}
+      {modal && <Modal setModal={setModal} btn={btn} />}
   </form>
   );
 }

@@ -3,13 +3,16 @@ const { verify } = require("jsonwebtoken");
 const checkToken = (req, res, next) => {
     const token = req.header('token');
     if (!token) {
-        return res.send({error: 'not login'})
+        return res.status(404).json({error: 'not login'})
     }
     try {
         const goodToken = verify(token, 'mysecretToken');
         req.id = goodToken
         if (goodToken) {
             next();
+        }
+        else {
+          return res.status(404).json({error: 'error token'})
         }
     }
     catch (err) {

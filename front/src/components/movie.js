@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { MdFavoriteBorder } from "react-icons/md";
+import { MdFavorite } from "react-icons/md";
 import { RiStarSFill } from "react-icons/ri";
 import ReactPlayer from "react-player";
 import("./movie.css");
@@ -9,6 +9,7 @@ import("./movie.css");
 function Movie() {
   const { movieId } = useParams();
   const [movie, setMovie] = useState([]);
+  const [isFav, setIsFav] = useState(false)
   const [casting, setCasting] = useState([]);
 
   useEffect(() => {
@@ -17,14 +18,17 @@ function Movie() {
 
   function getMovie() {
     axios
-      .get(`http://localhost:3001/Netflix/movies/${movieId}`)
+      .get(`http://localhost:3001/Netflix/movies/${movieId}`, {
+        headers: {
+          token: localStorage.getItem("token"),
+        },
+      })
       .then((response) => {
         if (response.data.message) {
           alert(response.data.message);
         } else {
-          response.data.forEach((element) => {
-            setMovie(element);
-          });
+          setMovie(response.data.movie);
+          setIsFav(response.data.isFav);
         }
       });
     axios
@@ -47,7 +51,7 @@ function Movie() {
       })
       .then((response) => {
         if (response.data.message) {
-          alert(response.data.message);
+          setIsFav(true);
         }
       });
   }
@@ -82,7 +86,7 @@ function Movie() {
             <span> {movie.duration} minutes </span>
             <span> (-{movie.parental_rating})</span>
             <span>
-              <MdFavoriteBorder onClick={favs} />
+              <MdFavorite color={isFav ? "red" : "white"} onClick={favs} />
             </span>
           </div>
           <h3>Description : </h3>

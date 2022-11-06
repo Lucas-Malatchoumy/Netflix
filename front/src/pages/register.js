@@ -25,7 +25,7 @@ function Form(props) {
         email: email,
         password: password,
         city: city,
-        address: address,
+        adress: address,
         zipCode: zipCode,
         profile: profile
       }
@@ -42,7 +42,7 @@ function Form(props) {
             setProfile("");
           }
           else {
-            localStorage.setItem('token', response.data)
+            localStorage.setItem('token', response.data.token)
             navigate('/dashboard');
           }
         })

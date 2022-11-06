@@ -23,14 +23,14 @@ function Search() {
 
   return (
     <div className="container">
-      <h1 className="category-title">Results : </h1>
+      <h1 className="category-title">Results : {movies.length < 1 && <span> No result</span>} </h1>
       <div className="row">
       {movies.map((movie) => {
         return (
           <div className="col-md-3 mt-3 mb-3">
             <Link to={`/movies/${movie.id}`}>
             <div className="card-movie" key={movie.id}>
-             <img src={movie.image}></img>
+             <img src={movie.image} alt={movie.title}></img>
              <span>{movie.title}</span>
             </div>
            </Link>
